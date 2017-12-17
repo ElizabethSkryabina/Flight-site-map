@@ -1,0 +1,14 @@
+body {
+   background-color: #ffffff;
+   color: #000000;
+}
+.chartt {
+  width: 90%;
+  height: 500px !important;
+  position: fixed;
+  top: 100px;
+  left: 50px;
+}
+/*html {
+    background-color: #ffffff; /* Цвет фона
+}*/

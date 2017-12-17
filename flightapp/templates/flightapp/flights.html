@@ -1,0 +1,65 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://www.amcharts.com/lib/3/ammap.js"></script>
+<script src="https://www.amcharts.com/lib/3/maps/js/worldLow.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script src="https://www.amcharts.com/lib/3/themes/chalk.js"></script>
+<script src="{% static 'flightapp/mymap.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>flihgts</title>
+
+    <link rel="stylesheet" href="{% static 'flightapp/style.css' %}">
+    {{ form.media }}
+</head>
+<body>
+<!--<div style="display: flex; flex: row nowrap; width: 100%; height: 50px">
+    <button onclick="updateTime()">Update time</button>
+</div>-->
+<form method="POST">
+    {% csrf_token %}
+    {{add.as_p}}
+    <button onclick="cleanmap()">Clean map</button>
+    <label>Select airport:  </label>
+    <select name="airport_id" onchange="changeAirport(value)">
+        {% for entry in air %}
+        <option value="{{ entry.id }}">{{ entry.airport }}: {{entry.airport_city}}</option>
+        {% endfor %}
+        printsomestuff({{selected_air.id}})
+    </select>
+</form>
+
+<!--Map-->
+
+<div class="chartt" id="chartdiv"></div>
+
+{% block javascript %}
+{% endblock %}
+
+<!-- **Print airports and flights**
+<h3> Airports (longitude, latitude) </h3>
+<table width="100%" cellspacing="0" cellpadding="5">
+   <tr>
+    <td width="500" valign="top">
+        <ul>
+            {% for f in air %}
+            <li>{{ f.airport }} : {{ f.airport_longitude }}  /  {{ f.airport_latitude }}</li>
+            {% endfor %}
+        </ul>
+    </td>
+       <td valign="top">
+           <ul>
+               {% for fl in fly %}
+               <li>({{ fl.airport_from }}) {{ fl.time_from | date }} - ({{ fl.airport_to }}) {{ fl.time_to }}</li>
+               {% endfor %}
+           </ul>
+       </td>
+   </tr>
+</table>-->
+
+</body>
+</html>
